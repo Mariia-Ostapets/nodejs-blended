@@ -6,24 +6,25 @@ import { ctrlWrapper } from '../utils/ctrlWrapper.js';
 
 import {
   loginUserController,
-  loguotUserById,
+  // loginUserController,
+  // loguotUserById,
   registerUserController,
 } from '../controllers/auth.js';
 
 const router = Router();
 
 router.post(
-  '/users/register',
+  '/signup',
   validateBody(userRegisterShema),
   ctrlWrapper(registerUserController),
 );
 
 router.post(
-  '/users/login',
+  '/login',
   validateBody(userLoginShema),
   ctrlWrapper(loginUserController),
 );
 
-router.post('/users/logout', ctrlWrapper(loguotUserById));
+// router.post('/users/logout', ctrlWrapper(loguotUserById));
 
 export default router;

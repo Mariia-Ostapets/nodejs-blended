@@ -2,13 +2,14 @@ import bcrypt from 'bcrypt';
 import createHttpError from 'http-errors';
 
 import {
-  createSession,
+  // createSession,
   createUser,
-  deleteSession,
-  deleteSessionByUserId,
+  // deleteSession,
+  // deleteSessionByUserId,
   findUserByEmail,
+  updateUserWithToken,
 } from '../services/auth.js';
-import { setupCookies } from '../utils/setupCookies.js';
+// import { setupCookies } from '../utils/setupCookies.js';
 
 export const registerUserController = async (req, res) => {
   const user = await findUserByEmail(req.body.email);
@@ -20,12 +21,11 @@ export const registerUserController = async (req, res) => {
   const newUser = await createUser(req.body);
 
   res.status(201).json({
-    status: 201,
-    message: 'Successfully registered a user!',
-    data: {
+    user: {
       name: newUser.name,
       email: newUser.email,
     },
+    token: newUser.token,
   });
 };
 
@@ -42,28 +42,24 @@ export const loginUserController = async (req, res) => {
     throw createHttpError(401, 'Email or password are wrong');
   }
 
-  await deleteSessionByUserId(user._id);
-
-  const session = await createSession(user._id);
-
-  setupCookies(session, res);
+  const updatedUser = await updateUserWithToken(user._id);
 
   res.json({
-    status: 200,
-    message: 'Successfully logged in an user!',
-    data: {
-      accessToken: session.accessToken,
+    user: {
+      name: updatedUser.name,
+      email: updatedUser.email,
     },
+    token: updatedUser.token,
   });
 };
 
-export const loguotUserById = async (req, res) => {
-  const sessionId = req.cookies.sessionId;
-  const refreshToken = req.cookies.refreshToken;
+// export const loguotUserById = async (req, res) => {
+//   const sessionId = req.cookies.sessionId;
+//   const refreshToken = req.cookies.refreshToken;
 
-  await deleteSession(sessionId, refreshToken);
+//   await deleteSession(sessionId, refreshToken);
 
-  res.clearCookie('sessionId');
-  res.clearCookie('refreshToken');
-  res.status(204).end();
-};
+//   res.clearCookie('sessionId');
+//   res.clearCookie('refreshToken');
+//   res.status(204).end();
+// };
