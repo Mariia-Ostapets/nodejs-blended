@@ -3,14 +3,10 @@ import createHttpError from 'http-errors';
 
 import {
   clearToken,
-  // createSession,
   createUser,
-  // deleteSession,
-  // deleteSessionByUserId,
   findUserByEmail,
   updateUserWithToken,
 } from '../services/auth.js';
-// import { setupCookies } from '../utils/setupCookies.js';
 
 export const registerUserController = async (req, res) => {
   const user = await findUserByEmail(req.body.email);
@@ -62,9 +58,8 @@ export const loguotUserById = async (req, res) => {
 export const refreshUser = (req, res) => {
   const user = req.user;
 
-
   res.json({
     name: user.name,
-    email: user.email
+    email: user.email,
   });
 };

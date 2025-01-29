@@ -6,13 +6,13 @@ import { findUserById } from '../services/auth.js';
 export const checkToken = async (req, res, next) => {
   const header = req.get('Authorization');
   if (!header) {
-    next(createHttpError(401, 'Not authorizated1'));
+    next(createHttpError(401, 'Not authorizated'));
     return;
   }
   const [bearer, token] = header.split(' ');
 
   if (bearer !== 'Bearer' || !token) {
-    next(createHttpError(401, 'Not authorizated 2'));
+    next(createHttpError(401, 'Not authorizated'));
     return;
   }
 
@@ -21,7 +21,7 @@ export const checkToken = async (req, res, next) => {
   const user = await findUserById(id);
 
   if (!user) {
-    next(createHttpError(401, 'Not authorizated 3'));
+    next(createHttpError(401, 'Not authorizated'));
     return;
   }
 
