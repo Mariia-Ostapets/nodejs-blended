@@ -3,8 +3,8 @@ info:
   version: 1.0.0
   title: Phonebook App
   license:
-    name: Apache 2.0
-    url: http://www.apache.org/licenses/LICENSE-2.0.html
+    name: Mariia Ostapets - GitHub
+    url: https://github.com/Mariia-Ostapets
   description: This is a documentation for Phonebook App
 tags:
   - name: User
