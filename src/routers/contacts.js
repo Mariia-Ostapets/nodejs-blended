@@ -5,9 +5,13 @@ import {
   addContactController,
   deleteContactController,
   getAllContactsController,
+  updateContactController,
 } from '../controllers/contacts.js';
 import { validateBody } from '../utils/validateBody.js';
-import { addContactSchema } from '../validation/contacts.js';
+import {
+  addContactSchema,
+  patchContactSchema,
+} from '../validation/contacts.js';
 
 const router = new Router();
 
@@ -20,5 +24,12 @@ router.post(
   ctrlWrapper(addContactController),
 );
 router.delete('/:id', checkToken, ctrlWrapper(deleteContactController));
+
+router.patch(
+  '/:id',
+  checkToken,
+  validateBody(patchContactSchema),
+  ctrlWrapper(updateContactController),
+);
 
 export default router;
