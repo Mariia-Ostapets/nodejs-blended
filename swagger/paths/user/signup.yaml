@@ -1,0 +1,106 @@
+tags:
+  - User
+summary: SignUp User
+operationId: SignUp
+description: 'SignUp User with name, email and password'
+security: []
+requestBody:
+  required: true
+  content:
+    application/json:
+      schema:
+        required:
+          - name
+          - email
+          - password
+        properties:
+          name:
+            type: string
+            example: 'Lady Gaga'
+          email:
+            type: string
+            example: 'ladygaga@gmail.com'
+          password:
+            type: string
+            minLength: 8
+            example: '1234567890'
+responses:
+  '201':
+    description: 'Register as a new User. User data is written to the database with unique _id. The server returns an object with User`s info and token.'
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+            - user
+            - token
+          properties:
+            user:
+              type: object
+              required:
+                - name
+                - email
+              properties:
+                name:
+                  type: string
+                  example: 'Lady Gaga'
+                email:
+                  type: string
+                  example: 'ladygaga@gmail.com'
+            token:
+              type: string
+              example: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3YWNiNDdiZTIzNWEwOGVhZWI0MTBmMCIsImlhdCI6MTczOTM3MTY0M30.7pHf2_Ggpy-FCvUENjXmUumQPynDeIBv29tZFXRjQSY'
+  '400':
+    description: 'Bad request. The server could not understand the request. Validation error.'
+    content:
+      application\json:
+        schema:
+          type: object
+          required:
+            - status
+            - message
+            - data
+          properties:
+            status:
+              type: integer
+              example: 400
+            message:
+              type: string
+              example: 'Name is required. Name should be at least 3 characters. Name should be at most 50 characters. Email is required. Email should be in format example@mail.com. Password is required. Password should be at least 8 characters.'
+            data:
+              type: object
+              required:
+                - message
+              properties:
+                message:
+                  type: string
+                  example: 'Name is required. Name should be at least 3 characters. Name should be at most 50 characters. Email is required. Email should be in format example@mail.com. Password is required. Password should be at least 8 characters.'
+  '404':
+    $ref: '../../components/responses/404.yaml'
+  '409':
+    description: 'Conflict Error. The request conflicts with the current state of the server.'
+    content:
+      application\json:
+        schema:
+          type: object
+          required:
+            - status
+            - message
+            - data
+          properties:
+            status:
+              type: integer
+              example: 409
+            message:
+              type: string
+              example: 'Email in use.'
+            data:
+              type: object
+              required:
+                - message
+              properties:
+                message:
+                  type: string
+                  example: 'Email in use.'
+  '500':
+    $ref: '../../components/responses/500.yaml'

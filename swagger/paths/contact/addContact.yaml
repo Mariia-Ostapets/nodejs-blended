@@ -1,0 +1,61 @@
+tags:
+  - Contact
+summary: Add contact
+operationId: AddContact
+description: 'Add new contact to the Phonebook.'
+security:
+  - bearerAuth: []
+requestBody:
+  required: true
+  content:
+    application/json:
+      schema:
+        required:
+          - name
+          - number
+        properties:
+          email:
+            type: string
+            example: 'John Snow'
+          number:
+            type: string
+            example: '+380501234567'
+responses:
+  '201':
+    description: 'New contact successfully added to contact list. The server returns an object with info about new contact.'
+    content:
+      application/json:
+        schema:
+          type: object
+          $ref: '../../components/schemas/contact.yaml'
+  '400':
+    description: 'Bad request. The server could not understand the request. Validation error.'
+    content:
+      application\json:
+        schema:
+          type: object
+          required:
+            - status
+            - message
+            - data
+          properties:
+            status:
+              type: integer
+              example: 400
+            message:
+              type: string
+              example: 'Name is required. Name should be at least 3 and at most 50 characters. Number is required. Number should be in format +XXXXXXXXXXXX.'
+            data:
+              type: object
+              required:
+                - message
+              properties:
+                message:
+                  type: string
+                  example: 'Name is required. Name should be at least 3 and at most 50 characters. Number is required. Number should be in format +XXXXXXXXXXXX.'
+  '401':
+    $ref: '../../components/responses/401.yaml'
+  '404':
+    $ref: '../../components/responses/404.yaml'
+  '500':
+    $ref: '../../components/responses/500.yaml'

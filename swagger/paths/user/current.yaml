@@ -1,0 +1,30 @@
+tags:
+  - User
+summary: Current User
+operationId: Current
+description: 'Get information about the current User.'
+security:
+  - bearerAuth: []
+responses:
+  '200':
+    description: 'The server returns an object with User`s info.'
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+            - name
+            - email
+          properties:
+            name:
+              type: string
+              example: 'Lady Gaga'
+            email:
+              type: string
+              example: 'ladygaga@gmail.com'
+  '401':
+    $ref: '../../components/responses/401.yaml'
+  '404':
+    $ref: '../../components/responses/404.yaml'
+  '500':
+    $ref: '../../components/responses/500.yaml'

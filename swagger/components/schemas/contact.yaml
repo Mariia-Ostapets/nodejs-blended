@@ -1,0 +1,21 @@
+type: object
+required:
+  - name
+  - number
+properties:
+  _id:
+    description: 'Backend-generated unique identifier for contact.'
+    type: string
+    example: '67ac81571191afe92554ed7d'
+  name:
+    description: 'Contact`s name. Is required. Should be at least 3 and at most 50 characters.'
+    type: string
+    example: 'John Snow'
+  number:
+    description: 'Contact`s phone number. Is required. Should be in format +XXXXXXXXXXXX.'
+    type: string
+    example: '+380501234567'
+  userId:
+    description: 'Backend-generated unique identifier for user.'
+    type: string
+    example: '67ab6e8b41351d15d8f5823c'

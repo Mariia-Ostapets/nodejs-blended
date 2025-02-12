@@ -1,0 +1,26 @@
+type: object
+required:
+  - name
+  - email
+  - password
+properties:
+  _id:
+    description: 'Backend-generated unique identifier for User.'
+    type: string
+    example: '67ab6e8b41351d15d8f5823c'
+  name:
+    description: 'User`s name. Is required. Should be at least 3 and at most 50 characters.'
+    type: string
+    example: 'Lady Gaga'
+  email:
+    description: 'User`s email. Is required. Should be in format example@mail.com.'
+    type: string
+    example: 'ladygaga@gmail.com'
+  password:
+    description: 'User`s password. Is required. Should be at least 8 characters.'
+    type: string
+    example: '1234567890'
+  token:
+    description: 'User`s access token'
+    type: string
+    example: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3YWNiNDdiZTIzNWEwOGVhZWI0MTBmMCIsImlhdCI6MTczOTM3MTY0M30.7pHf2_Ggpy-FCvUENjXmUumQPynDeIBv29tZFXRjQSY'
