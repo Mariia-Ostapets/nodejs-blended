@@ -14,7 +14,7 @@ requestBody:
           - name
           - number
         properties:
-          email:
+          name:
             type: string
             example: 'John Snow'
           number:
